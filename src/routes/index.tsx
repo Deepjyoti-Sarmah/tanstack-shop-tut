@@ -6,6 +6,7 @@ import { createServerFn } from '@tanstack/react-start'
 import { ArrowRightIcon } from 'lucide-react'
 
 const fetchProductFn = createServerFn({ method: "GET" }).handler(async () => {
+  //TODO: change the products
   // const { getRecommendedProducts } = await import('@data/products')
   // const products = await getRecommendedProducts()
   const products = sampleProducts.slice(0, 3)

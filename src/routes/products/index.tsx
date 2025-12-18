@@ -1,8 +1,9 @@
 import { ProductCard } from '@/components/ProductCard'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ProductInsert, sampleProducts } from '@/db/seed'
+import { useQuery } from '@tanstack/react-query'
 import { createFileRoute, Link } from '@tanstack/react-router'
-import { createServerFn } from '@tanstack/react-start'
+import { createMiddleware, createServerFn, json } from '@tanstack/react-start'
 
 const fetchProducts = createServerFn({ method: "GET" }).handler(async () => {
   //TODO:: change to real data
@@ -10,16 +11,42 @@ const fetchProducts = createServerFn({ method: "GET" }).handler(async () => {
   return products
 })
 
+const loggerMiddleware = createMiddleware().server(
+  async ({ next, request }) => {
+    console.log(
+      "---loggerMiddleware---",
+      request.url,
+      "from",
+      request.headers.get("origin"),
+    )
+    return next()
+  }
+)
+
 export const Route = createFileRoute('/products/')({
   component: RouteComponent,
   loader: async () => {
     console.log("---loader---")
     return fetchProducts()
+  },
+  server: {
+    middleware: [loggerMiddleware],
+    handlers: {
+      POST: async ({ request }) => {
+        const body = await request.json()
+        return json({ message: "Hello, world from POST request!" })
+      }
+    }
   }
 })
 
 function RouteComponent() {
-  const data = Route.useLoaderData()
+  const products = Route.useLoaderData()
+  const { data } = useQuery({
+    queryKey: ['products'],
+    queryFn: () => fetchProducts(),
+    initialData: products
+  })
 
   return (
     <div className="space-y-6">
