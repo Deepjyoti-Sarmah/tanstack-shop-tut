@@ -1,21 +1,28 @@
+import { ProductCard } from '@/components/ProductCard'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { sampleProducts } from '@/db/seed'
+import { ProductInsert, sampleProducts } from '@/db/seed'
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { createServerFn } from '@tanstack/react-start'
 import { ArrowRightIcon } from 'lucide-react'
+
+const fetchProductFn = createServerFn({ method: "GET" }).handler(async () => {
+  // const { getRecommendedProducts } = await import('@data/products')
+  // const products = await getRecommendedProducts()
+  const products = sampleProducts.slice(0, 3)
+  return products
+})
+
 export const Route = createFileRoute('/')({
   component: App,
   loader: async () => {
     // This runs on server during SSR AND on client during navigation
-    // const response = await fetch('https://fakestoreapi.com/products')
-    // const data = await response.json()
-    // console.log('--server products--', data[0])
-    return { products: sampleProducts }
+    return fetchProductFn()
   },
 })
 
-function App() {
+async function App() {
 
-  const { products } = Route.useLoaderData()
+  const products = Route.useLoaderData()
   console.log('--client products--', products)
 
   return (
@@ -65,11 +72,11 @@ function App() {
               </Link>
             </div>
           </div>
-          {/* <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-6"> */}
-          {/*   {products.map((product, index) => ( */}
-          {/*     <ProductCard product={product} key={`product-${index}`} /> */}
-          {/*   ))} */}
-          {/* </div> */}
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-6">
+            {products.map((product: ProductInsert, index: number) => (
+              <ProductCard product={product} key={`product-${index}`} />
+            ))}
+          </div>
         </Card>
       </section>
     </div>
