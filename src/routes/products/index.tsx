@@ -1,13 +1,13 @@
 import { ProductCard } from '@/components/ProductCard'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { sampleProducts } from '@/db/seed'
 import { useQuery } from '@tanstack/react-query'
 import { createFileRoute } from '@tanstack/react-router'
 import { createMiddleware, createServerFn, json } from '@tanstack/react-start'
 
 const fetchProducts = createServerFn({ method: "GET" }).handler(async () => {
-  //TODO:: change to real data
-  const products = sampleProducts;
+  const { getAllProducts } = await import("@/data/products")
+  const products = await getAllProducts();
+
   return products
 })
 
@@ -72,7 +72,7 @@ function RouteComponent() {
       </section>
       <section>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {data?.map((product: ProductInsert, index: number) => (
+          {data?.map((product, index) => (
             <ProductCard key={`product-${index}`} product={product} />
           ))}
         </div>

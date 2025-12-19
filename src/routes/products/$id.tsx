@@ -19,24 +19,21 @@ import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useQueryClient } from '@tanstack/react-query'
 import { RecommendedProducts } from '@/components/RecommendedProducts'
-import { sampleProducts } from '@/db/seed'
+import { ProductSelect } from '@/db/schema'
 
 const fetchProductById = createServerFn({ method: 'POST' })
   .inputValidator((data: { id: string }) => data)
   .handler(async ({ data }) => {
-    //TODO: fetch data from db
-    // const { getProductById } = await import('@/data/products')
-    // const product = await getProductById(data.id)
-    const product = sampleProducts[Number(data.id)];
+    const { getProductById } = await import("@/data/products")
+    const product = await getProductById(data.id)
+
     return product
   })
 
 const fetchRecommendedProducts = createServerFn({ method: 'GET' }).handler(
   async () => {
-    //TODO: fetch data from db
-    // const { getRecommendedProducts } = await import('@/data/products')
-    // return getRecommendedProducts()
-    return sampleProducts
+    const { getRecommendedProducts } = await import('@/data/products')
+    return getRecommendedProducts()
   },
 )
 
@@ -55,9 +52,8 @@ export const Route = createFileRoute('/products/$id')({
   },
   head: async ({ loaderData: data }) => {
     const { product } = data as {
-      //TODO: change after db is added
-      product: ProductInsert
-      recommendedProducts: Promise<ProductInsert[]>
+      product: ProductSelect
+      recommendedProducts: Promise<ProductSelect[]>
     }
     console.log('product in head', product)
     if (!product) {

@@ -1,15 +1,13 @@
 import { ProductCard } from '@/components/ProductCard'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { sampleProducts } from '@/db/seed'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { ArrowRightIcon } from 'lucide-react'
 
 const fetchProductFn = createServerFn({ method: "GET" }).handler(async () => {
-  //TODO: change the products
-  // const { getRecommendedProducts } = await import('@data/products')
-  // const products = await getRecommendedProducts()
-  const products = sampleProducts.slice(0, 3)
+  const { getRecommendedProducts } = await import("@/data/products")
+  const products = await getRecommendedProducts()
+
   return products
 })
 
@@ -74,7 +72,7 @@ async function App() {
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-6">
-            {products.map((product: ProductInsert, index: number) => (
+            {products.map((product, index) => (
               <ProductCard product={product} key={`product-${index}`} />
             ))}
           </div>
