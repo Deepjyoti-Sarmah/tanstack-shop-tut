@@ -19,7 +19,7 @@ import { Suspense } from 'react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useQueryClient } from '@tanstack/react-query'
 import { RecommendedProducts } from '@/components/RecommendedProducts'
-import { ProductInsert, sampleProducts } from '@/db/seed'
+import { sampleProducts } from '@/db/seed'
 
 const fetchProductById = createServerFn({ method: 'POST' })
   .inputValidator((data: { id: string }) => data)

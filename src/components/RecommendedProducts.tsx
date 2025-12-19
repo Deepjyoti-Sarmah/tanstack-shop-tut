@@ -1,4 +1,3 @@
-import { ProductInsert } from '@/db/seed'
 import { ProductCard } from './ProductCard'
 import { use } from 'react'
 

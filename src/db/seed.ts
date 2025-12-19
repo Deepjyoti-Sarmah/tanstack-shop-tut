@@ -1,18 +1,7 @@
-export type ProductInsert = {
-  id: number,
-  name: string,
-  description?: string
-  price: string,
-  badge?: string,
-  rating: string,
-  reviews: number,
-  image?: string,
-  inventory: string
-}
+import { ProductInsert } from "./schema";
 
 export const sampleProducts: ProductInsert[] = [
   {
-    id: 1,
     name: 'TanStack Router Pro',
     description:
       'The most powerful routing solution for React. Built with TypeScript, featuring type-safe routes, code splitting, and server-side rendering.',
@@ -24,8 +13,6 @@ export const sampleProducts: ProductInsert[] = [
     inventory: 'in-stock',
   },
   {
-
-    id: 2,
     name: 'TanStack Query Enterprise',
     description:
       'Powerful data synchronization for React. Fetch, cache, and update server state with zero configuration.',
@@ -37,8 +24,6 @@ export const sampleProducts: ProductInsert[] = [
     inventory: 'in-stock',
   },
   {
-
-    id: 3,
     name: 'TanStack Table Premium',
     description:
       'Headless UI for building powerful tables and datagrids. Fully customizable and framework agnostic.',
@@ -50,7 +35,6 @@ export const sampleProducts: ProductInsert[] = [
     inventory: 'in-stock',
   },
   {
-    id: 4,
     name: 'TanStack Start Framework',
     description:
       'Full-stack React framework with file-based routing, server-side rendering, and built-in optimizations.',
@@ -61,7 +45,6 @@ export const sampleProducts: ProductInsert[] = [
     inventory: 'in-stock',
   },
   {
-    id: 5,
     name: 'TanStack Form Builder',
     description:
       'Headless form library with validation, async submission, and field-level control. Perfect for complex forms.',
@@ -72,7 +55,6 @@ export const sampleProducts: ProductInsert[] = [
     inventory: 'backorder',
   },
   {
-    id: 6,
     name: 'TanStack Virtual Scroller',
     description:
       'High-performance virtual scrolling for large lists. Smooth scrolling with minimal memory footprint.',
@@ -83,7 +65,6 @@ export const sampleProducts: ProductInsert[] = [
     inventory: 'in-stock',
   },
   {
-    id: 7,
     name: 'TanStack DevTools Suite',
     description:
       'Complete developer tools for debugging TanStack applications. Time-travel debugging and performance profiling.',
@@ -94,7 +75,6 @@ export const sampleProducts: ProductInsert[] = [
     inventory: 'in-stock',
   },
   {
-    id: 8,
     name: 'TanStack Store Manager',
     description:
       'Lightweight state management with derived state, subscriptions, and persistence. Perfect for React apps.',

@@ -1,6 +1,6 @@
 import { ProductCard } from '@/components/ProductCard'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { ProductInsert, sampleProducts } from '@/db/seed'
+import { sampleProducts } from '@/db/seed'
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { ArrowRightIcon } from 'lucide-react'
