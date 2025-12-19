@@ -2,7 +2,7 @@ import { ProductCard } from '@/components/ProductCard'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { ProductInsert, sampleProducts } from '@/db/seed'
 import { useQuery } from '@tanstack/react-query'
-import { createFileRoute, Link } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 import { createMiddleware, createServerFn, json } from '@tanstack/react-start'
 
 const fetchProducts = createServerFn({ method: "GET" }).handler(async () => {
@@ -47,7 +47,7 @@ function RouteComponent() {
     queryFn: () => fetchProducts(),
     initialData: products
   })
-
+  console.log('---data--', data)
   return (
     <div className="space-y-6">
       <section className="space-y-4 max-w-6xl mx-auto">
