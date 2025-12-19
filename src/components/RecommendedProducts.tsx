@@ -1,11 +1,11 @@
+import { ProductSelect } from '@/db/schema'
 import { ProductCard } from './ProductCard'
 import { use } from 'react'
 
 export function RecommendedProducts({
   recommendedProducts,
 }: {
-  //TODO: change after db change
-  recommendedProducts: Promise<ProductInsert[]>
+  recommendedProducts: Promise<ProductSelect[]>
 }) {
   const recommendedProductsData = use(recommendedProducts)
   return (

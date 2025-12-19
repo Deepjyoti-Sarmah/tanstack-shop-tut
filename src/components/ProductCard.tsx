@@ -10,7 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from './ui/card'
-import { ProductInsert } from '@/db/seed'
+import { ProductSelect } from '@/db/schema'
 
 const inventoryTone = {
   'in-stock': 'bg-emerald-50 text-emerald-600 border-emerald-100',
@@ -18,15 +18,13 @@ const inventoryTone = {
   preorder: 'bg-indigo-50 text-indigo-700 border-indigo-100',
 }
 
-// TODO: Change product type
-export function ProductCard({ product }: { product: ProductInsert }) {
+export function ProductCard({ product }: { product: ProductSelect }) {
   const router = useRouter()
   // const queryClient = useQueryClient()
   return (
     <Link
       to="/products/$id"
-      //TODO: Change from explecit string conv
-      params={{ id: String(product.id) }}
+      params={{ id: product.id }}
       className="cursor-pointer h-full hover:-translate-y-1
      hover:shadow-lg transition"
     >

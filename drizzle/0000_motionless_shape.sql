@@ -15,7 +15,7 @@ CREATE TABLE "products" (
 	"price" numeric(10, 2) NOT NULL,
 	"badge" "badge",
 	"rating" numeric(3, 2) DEFAULT '0' NOT NULL,
-	"review" integer DEFAULT 0 NOT NULL,
+	"reviews" integer DEFAULT 0 NOT NULL,
 	"image" varchar(512) NOT NULL,
 	"inventory" "inventory" DEFAULT 'in-stock' NOT NULL,
 	"created_at" timestamp DEFAULT now() NOT NULL

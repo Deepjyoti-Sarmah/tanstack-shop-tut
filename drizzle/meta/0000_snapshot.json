@@ -1,5 +1,5 @@
 {
-  "id": "1766c78b-6b93-4eb7-a6f3-ddba2af6ce14",
+  "id": "2153a8b2-a776-487b-bc0b-b3c725580e1f",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -108,8 +108,8 @@
           "notNull": true,
           "default": "'0'"
         },
-        "review": {
-          "name": "review",
+        "reviews": {
+          "name": "reviews",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
