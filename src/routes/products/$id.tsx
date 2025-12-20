@@ -20,6 +20,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { useQueryClient } from '@tanstack/react-query'
 import { RecommendedProducts } from '@/components/RecommendedProducts'
 import { ProductSelect } from '@/db/schema'
+import { mutateCartFn } from '../cart'
 
 const fetchProductById = createServerFn({ method: 'POST' })
   .inputValidator((data: { id: string }) => data)
@@ -152,14 +153,13 @@ function RouteComponent() {
                       console.log('add to cart')
                       e.preventDefault()
                       e.stopPropagation()
-                      //TODO: uncomment after adding queryClient
-                      // await mutateCartFn({
-                      //   data: {
-                      //     action: 'add',
-                      //     productId: product.id,
-                      //     quantity: 1,
-                      //   },
-                      // })
+                      await mutateCartFn({
+                        data: {
+                          action: 'add',
+                          productId: product.id,
+                          quantity: 1,
+                        },
+                      })
                       await router.invalidate({ sync: true })
                       await queryClient.invalidateQueries({
                         queryKey: ['cart-items-data'],

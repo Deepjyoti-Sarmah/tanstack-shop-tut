@@ -39,3 +39,48 @@ export async function clearCart() {
   await db.delete(cartItems).where(gt(cartItems.quantity, 0))
   return await getCartItems()
 }
+
+export async function updateCartItem(productId: string, quantity: number = 1) {
+  const qty = Math.max(0, Math.min(quantity, 99))
+
+  if (qty === 0) {
+    // delete the item
+    await db.delete(cartItems).where(eq(cartItems.productId, productId))
+  } else {
+    // check if an item already exists in the cart 
+    const existingItem = await db.select()
+      .from(cartItems)
+      .where(eq(cartItems.productId, productId))
+      .limit(1)
+
+    if (existingItem.length > 0) {
+      // Update quantity
+      await db
+        .update(cartItems)
+        .set({ quantity: qty })
+        .where(eq(cartItems.productId, productId))
+    }
+  }
+}
+
+export async function addToCart(productId: string, quantity: number = 1) {
+  const qty = Math.max(1, Math.min(quantity, 99))
+
+  // Check if anitm already exists in the cart
+  const existingItem = await db.select()
+    .from(cartItems)
+    .where(eq(cartItems.productId, productId))
+    .limit(1)
+
+  // if exists update quantity
+  if (existingItem.length > 0) {
+    await updateCartItem(productId, existingItem[0].quantity + qty)
+  } else {
+    // insert a new item 
+    await db.insert(cartItems).values({
+      productId, quantity: qty
+    })
+  }
+
+  return await getCartItems()
+}

@@ -10,7 +10,7 @@ import { CartFooter } from '@/components/cart/CartFooter'
 import { CartItem, MutateCartFnInput } from '@/types/cart-types'
 
 const fetchCartItems = createServerFn({ method: 'GET' }).handler(async () => {
-  const { getCartItems } = await import('@/data/cart.server')
+  const { getCartItems } = await import("@/data/cart.server")
   const data = await getCartItems()
   return data
 })
@@ -43,14 +43,14 @@ function CartPage() {
   const queryClient = useQueryClient()
   const router = useRouter()
   const cart = Route.useLoaderData()
-  const shipping = cart.items.length > 0 ? 8 : 0
-  const subtotal = cart.items.reduce(
+  const shipping = cart.itmes.length > 0 ? 8 : 0
+  const subtotal = cart.itmes.reduce(
     (acc: number, item) => acc + Number(item.price) * item.quantity,
     0,
   )
   const total = subtotal + shipping
 
-  if (cart.items.length === 0) {
+  if (cart.itmes.length === 0) {
     return <EmptyCartState />
   }
 
@@ -121,7 +121,7 @@ function CartPage() {
         </div>
 
         <div className="divide-y divide-slate-200 rounded-xl border border-slate-200 bg-white shadow-xs dark:divide-slate-800 dark:border-slate-800 dark:bg-slate-950/40">
-          {cart.items.map((item) => (
+          {cart.itmes.map((item) => (
             <div
               key={item.id}
               className="grid gap-4 p-4 sm:grid-cols-[auto,1fr,auto]"

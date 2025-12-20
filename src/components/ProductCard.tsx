@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from './ui/card'
 import { ProductSelect } from '@/db/schema'
+import { mutateCartFn } from '@/routes/cart'
 
 const inventoryTone = {
   'in-stock': 'bg-emerald-50 text-emerald-600 border-emerald-100',
@@ -71,14 +72,13 @@ export function ProductCard({ product }: { product: ProductSelect }) {
               console.log('add to cart')
               e.preventDefault()
               e.stopPropagation()
-              //TODO: Change comments
-              // await mutateCartFn({
-              //   data: {
-              //     action: 'add',
-              //     productId: product.id,
-              //     quantity: 1,
-              //   },
-              // })
+              await mutateCartFn({
+                data: {
+                  action: 'add',
+                  productId: product.id,
+                  quantity: 1,
+                },
+              })
               await router.invalidate({ sync: true })
               // await queryClient.invalidateQueries({
               //   queryKey: ['cart-items-data'],
