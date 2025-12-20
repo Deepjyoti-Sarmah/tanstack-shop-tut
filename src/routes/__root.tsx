@@ -1,11 +1,12 @@
 import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
 import { TanStackDevtools } from '@tanstack/react-devtools'
 import { type QueryClient, QueryClientProvider } from '@tanstack/react-query'
-
+import { createRootRouteWithContext, HeadContent, Scripts } from '@tanstack/react-router'
 import Header from '../components/Header'
 
 import appCss from '../styles.css?url'
-import { createRootRouteWithContext, HeadContent, Scripts } from '@tanstack/react-router'
+import { client } from '../lib/appwrite'
+import { useEffect } from 'react'
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   {
@@ -40,6 +41,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   const { queryClient } = Route.useRouteContext()
+
+  // Ping Appwrite backend to verify setup when app opens
+  useEffect(() => {
+    client.ping()
+  }, [])
 
   return (
     <QueryClientProvider client={queryClient}>
