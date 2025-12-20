@@ -1,9 +1,8 @@
-
 import { Client, Account, Databases } from "appwrite";
 
 const client = new Client()
-  .setEndpoint(process.env.VITE_APPWRITE_ENDPOINT!)
-  .setProject(process.env.VITE_APPWRITE_PROJECT_ID!);
+  .setEndpoint("https://sgp.cloud.appwrite.io/v1")
+  .setProject("694686c900349ae024b0");
 
 const account = new Account(client);
 const databases = new Databases(client);
