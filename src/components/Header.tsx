@@ -32,24 +32,23 @@ export default function Header() {
             >
               Products
             </Link>
-            {/* TODO: uncomment */}
-            {/* <Link to="/products/create-product">Create Product</Link> */}
+            <Link to="/products/create-product">Create Product</Link>
           </nav>
         </div>
         <div className="flex items-center gap-2">
-          {/* TODO: uncomment */}
-          {/* <Link */}
-          {/*   to="/cart" */}
-          {/*   className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md" */}
-          {/* > */}
-          {/*   <span>Cart</span> */}
-          {/*   <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-slate-900 px-2 text-[11px] font-bold text-white"> */}
-          {/*     {cartItemsData?.count ?? 0} */}
-          {/*   </span> */}
-          {/*   <span className="hidden text-[11px] font-medium tex-slate-500 sm:inline"> */}
-          {/*     ${cartItemsData?.total.toFixed(2) ?? 0} */}
-          {/*   </span> */}
-          {/* </Link> */}
+          <Link
+            to="/cart"
+            className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-800 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+          >
+            <span>Cart</span>
+            <span className="flex h-6 min-w-6 items-center justify-center rounded-full bg-slate-900 px-2 text-[11px] font-bold text-white">
+              {/* TODO: cartItemsData */}
+              {/* {cartItemsData?.count ?? 0} */}
+            </span>
+            <span className="hidden text-[11px] font-medium tex-slate-500 sm:inline">
+              {/* ${cartItemsData?.total.toFixed(2) ?? 0} */}
+            </span>
+          </Link>
         </div>
       </div>
     </header>
